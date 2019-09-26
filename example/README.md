@@ -1,13 +1,16 @@
-# with-item-events
+# react-use-countdown-timer.
 
 > Make any DOM events handler more powerful and Specification with simple way
 
-[![NPM](https://img.shields.io/npm/v/with-item-events.svg)](https://www.npmjs.com/package/with-item-events) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-use-countdown-timer.svg)](https://www.npmjs.com/package/react-use-countdown-timer) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save with-item-events
+npm install --save react-use-countdown-timer
+```
+```bash
+yarn add react-use-countdown-timer
 ```
 ## Table of Contents
 
@@ -21,72 +24,27 @@ npm install --save with-item-events
 
 ## Quick Start
 ```jsx
-import React, { useCallback, useState } from 'react';
-import withItemEvents from 'with-item-events';
-const ItemOne = withItemEvents(
-    (props) => {
-        const { onChange, item, onTestClick, id } = props;
-        return (
-            <div onClick={onChange} data-id={id}>
-                <p>{`Click me to show item's name`}</p>
-                <p>
-                    <b>{item.name}</b>
-                </p>
-                <div onClick={onTestClick}>
-                    <p>{`Click this to show  name:value`}</p>
-                    <p>{`itemPayloadId${item.id}`}</p>
-                    <p>{`propId${id}`}</p>
-                </div>
-            </div>
-        );
-    },
-    [ { actionType: 'onTestClick', isStopPropagation: true }, { actionType: 'onTestClick', isStopPropagation: true } ]
-);
+import React from 'react';
+import useCountdown from './useCountdown';
+
 const App = () => {
-    const [ { item: stateItem }, setState ] = useState({ item: {} });
-    const [ { x, y }, setPoint ] = useState({});
-    const _onChange = useCallback((e, data) => {
-        switch (data.actionType) {
-            case 'onTestClick':
-                setPoint(data.point);
-                break;
-            default:
-                setState(data);
-                break;
-        }
-    }, []);
+    const [ timer1 ] = useCountdown({ period: 10000 });
+    const [ timer2 ] = useCountdown({ period: 10000, gap: 500 });
+    const [ timer3 ] = useCountdown({ period: 10000, gap: 100 });
 
     return (
-        <div style={{ padding: '20px' }}>
-            <h2>Item</h2>
-            <ItemOne name='point' value={{ x: 1, y: 2 }} onChange={_onChange} onTestClick={_onChange} actionType='deleteItem' item={{ name: 'test', id: 1 }} id='1' />
-            <h2>Result</h2>
-            <p>
-                {`item's name:`}
-                {stateItem.name}
-            </p>
-            <div>
-                <p>
-                    {`x:`}
-                    {x}
-                </p>
-                <p>
-                    {`y:`}
-                    {y}
-                </p>
-            </div>
+        <div style={{ padding: '20px', width: '100%' }}>
+            <h1>Test Use Coundown</h1>
+            <p>speed normal 1sec: {timer1 / 1000}</p>
+            <p>speed gap 500ms: {timer2 / 1000}</p>
+            <p>speed gap 100ms: {timer3 / 1000}</p>
         </div>
     );
 };
 export default App;
 ```
 ## ScreenShot
-* Step 1 Init state
-![`Step 1`](https://i.imgur.com/L4djOVZ.png) 
-* Step 2 Click name : value
-![`Step 2`](https://i.imgur.com/Thzlcgi.png) 
-* Step 3 Click items's name
-![`Step 3`](https://i.imgur.com/xWdobqw.png) 
+
 ## Usage
 
 NOTE: React hooks require `react` and `react-dom` version `16.8.0` or higher.
@@ -95,7 +53,6 @@ NOTE: React hooks require `react` and `react-dom` version `16.8.0` or higher.
 
 ## Plan
 * TypeScript
-* validation of HOC prop 
 
 ## Change Log 
 ### 1.0.1

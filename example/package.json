@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "babel-eslint": "^10.0.3",
     "prop-types": "^15.7.2",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
