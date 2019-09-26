@@ -2,6 +2,7 @@
 import React from 'react';
 import useCountdown from './useCountdown';
 import { render, fireEvent, getByTestId } from '@testing-library/react';
+import { JestEnvironment } from '@jest/environment';
 
 const App = () => {
     const [ timer1 ] = useCountdown({ period: 10000 });
@@ -22,13 +23,11 @@ describe('withItemEvents', () => {
     test('Componet can show', () => {
         expect(App).toBeTruthy();
     });
-    test('Test App Events', () => {
-        const { getByRole, getByTestId } = render(<App />);
-        // expect(getByRole(fieldTest.name + 'X').innerHTML).toEqual('x:');
-        // fireEvent.click(getByTestId(/onTestClick/i));
-        // expect(getByRole(fieldTest.name + 'X').innerHTML).toEqual('x:' + fieldTest.value.x);
-        // expect(getByRole(/pointItem/i).innerHTML).toMatch("item's name:");
-        // fireEvent.click(getByTestId('getItem'));
-        // expect(getByRole(/pointItem/i).innerHTML).toMatch(new RegExp(fieldTest.item.title, 'i'));
+    test('timer1', () => {
+        jest.useFakeTimers();
+        // setTimeout(() => {
+        //     expect(component.state().fruits).toEqual(fruits);
+        // }, 1500);
+        // jest.runAllTimers();
     });
 });
